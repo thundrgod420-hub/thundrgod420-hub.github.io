@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Romantic Gallery</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Password Entry Screen -->
+    <div id="passwordScreen" class="password-screen">
+        <div class="password-container">
+            <h1 class="password-title">Romantic Gallery</h1>
+            <p class="password-subtitle">Enter the special date</p>
+            <input
+                type="text"
+                id="passwordInput"
+                class="password-input"
+                placeholder="Enter the date"
+                maxlength="8"
+                inputmode="numeric"
+            >
+            <p class="password-error" id="passwordError">Incorrect date. Please try again.</p>
+        </div>
+    </div>
+
+    <div id="galleryContent" class="gallery-content hidden">
+        <!-- Lily hotspots will be added by JavaScript -->
+        <div id="lilyHotspots" class="lily-hotspots"></div>
+
+        <!-- Memory Card (Initially Hidden) -->
+        <div id="memoryCard" class="memory-card hidden">
+            <button id="closeMemoryCard" class="close-memory-card">&times;</button>
+            <div class="memory-card-content">
+                <img id="memoryImage" class="memory-image" src="" alt="Memory" draggable="false">
+                <div class="memory-text">
+                    <div id="memoryDate" class="memory-date"></div>
+                    <div id="memoryDescription" class="memory-description" contenteditable="false"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,419 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Disable text selection except for description */
+body {
+    -webkit-user-select: none; /* iOS Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera and Safari */
+    -webkit-touch-callout: none; /* iOS Safari disable callout */
+    -webkit-tap-highlight-color: transparent; /* Remove tap highlight */
+    font-family: 'Georgia', serif;
+    line-height: 1.6;
+    color: #333;
+    background: url('./media/bg/Lovely Lily Flower Pictures for Your Inspiration.jpg') no-repeat center center;
+    background-size: cover;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    transition: background-color 0.3s ease; /* For the darkening effect */
+}
+
+/* Enable text selection for description only */
+.memory-description {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+/* Prevent image zoom jumps */
+body {
+    background-attachment: scroll; /* Changed from fixed to prevent zoom jumps */
+}
+
+/* iPhone 13 safe area */
+@supports (bottom: env(safe-area-inset-bottom)) {
+    .memory-card {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+}
+
+/* Subtle dark overlay for readability */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.15); /* Very light dark overlay */
+    z-index: -1;
+}
+
+.lily-hotspots {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Allow clicks to pass through initially */
+    z-index: 2;
+}
+
+.lily-hotspot {
+    position: absolute;
+    background: transparent; /* No background */
+    border: 2px solid transparent; /* No border */
+    border-radius: 50%;
+    cursor: pointer;
+    pointer-events: all; /* Make hotspots clickable */
+    transition: all 0.3s ease;
+    /* Enlarged size for better clickability (about 50% larger) */
+    width: 96px;
+    height: 96px;
+    transform: translate(-50%, -50%); /* Center the hotspot on the coordinates */
+}
+
+.lily-hotspot:hover,
+.lily-hotspot:focus {
+    background: rgba(255, 255, 255, 0.1); /* Very subtle on hover */
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* iPhone 13 specific adjustments for hotspot sizes */
+@media screen and (device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) {
+    .lily-hotspot {
+        width: 90px;
+        height: 90px;
+        border-width: 3px; /* Slightly thicker for better touch target */
+    }
+}
+
+/* Additional mobile optimizations */
+@media screen and (max-width: 768px) {
+    .lily-hotspot {
+        width: 84px;
+        height: 84px;
+    }
+}
+
+/* Ensure proper sizing on various devices */
+@media screen and (max-width: 480px) {
+    .lily-hotspot {
+        width: 75px;
+        height: 75px;
+    }
+}
+
+/* Password Screen Styles */
+.password-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(249, 240, 240, 0.85); /* Semi-transparent background to blend with flower image */
+    z-index: 1000;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.password-container {
+    text-align: center;
+    padding: 2rem;
+    max-width: 90%;
+    width: 100%;
+}
+
+.password-title {
+    font-size: 2.5rem;
+    color: #d46b8c;
+    margin-bottom: 1rem;
+    font-weight: normal;
+    letter-spacing: 1px;
+}
+
+.password-subtitle {
+    font-size: 1.2rem;
+    color: #a0526a;
+    margin-bottom: 2rem;
+}
+
+.password-input {
+    width: 100%;
+    max-width: 300px;
+    padding: 1rem;
+    font-size: 1.2rem;
+    border: 2px solid #e6b8c7;
+    border-radius: 8px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9);
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.password-input:focus {
+    border-color: #d46b8c;
+    box-shadow: 0 0 0 3px rgba(212, 107, 140, 0.2);
+}
+
+.password-error {
+    color: #e74c3c;
+    margin-top: 1rem;
+    font-size: 1rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    height: 0;
+}
+
+.password-error.show {
+    opacity: 1;
+    height: auto;
+}
+
+/* Shake animation for wrong password */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-10px); }
+    40%, 80% { transform: translateX(10px); }
+}
+
+.shake {
+    animation: shake 0.6s ease-in-out;
+}
+
+/* Gallery Content Styles */
+.gallery-content {
+    transition: opacity 0.5s ease;
+    position: relative;
+    z-index: 1;
+    height: 100vh; /* Full height for the gallery */
+}
+
+.gallery-content.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Gallery Container */
+.gallery-container {
+    padding: 0 1rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+/* Memory Card Styles */
+.memory-card {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80vh;
+    max-height: -webkit-fill-available; /* iOS Safari support */
+    background: #fff9f0; /* Scrapbook/letter aesthetic */
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.2);
+    z-index: 2001;
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1); /* Smooth easing */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+.memory-card.active {
+    transform: translateY(0);
+}
+
+.memory-card.hidden {
+    display: block; /* Still display block so it can be animated */
+    opacity: 0;
+    pointer-events: none;
+}
+
+.close-memory-card {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #a0526a;
+    z-index: 2002;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+    padding: 0;
+    margin: 0;
+}
+
+.close-memory-card:hover {
+    background-color: rgba(160, 82, 106, 0.1);
+}
+
+.memory-card-content {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    padding-top: 40px; /* Space for close button */
+}
+
+.memory-image {
+    width: 100%;
+    height: auto;
+    max-height: 50%;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    -webkit-user-drag: none; /* Disable image dragging */
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+}
+
+.memory-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.memory-date {
+    font-family: 'Georgia', serif; /* Elegant serif font */
+    font-size: 1.1rem;
+    color: #d46b8c;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+    line-height: 1.4; /* Comfortable line height for reading */
+}
+
+.memory-description {
+    flex: 1;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; /* Clean sans-serif */
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6; /* Comfortable line height for reading */
+    padding: 10px;
+    border: 1px dashed #d46b8c;
+    border-radius: 8px;
+    background: rgba(212, 107, 140, 0.05);
+    overflow-y: auto;
+    min-height: 100px;
+}
+
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .password-title {
+        font-size: 2rem;
+    }
+
+    .password-subtitle {
+        font-size: 1rem;
+    }
+
+    .password-input {
+        max-width: 250px;
+        padding: 0.8rem;
+        font-size: 1.1rem;
+    }
+
+    .title {
+        font-size: 1.5rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .memory-card {
+        width: 100%;
+        left: 0;
+        transform: translateY(100%);
+        border-radius: 20px 20px 0 0;
+    }
+
+    .memory-card.active {
+        transform: translateY(0);
+    }
+
+    .header {
+        padding: 1.5rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .password-title {
+        font-size: 1.8rem;
+    }
+
+    .password-container {
+        padding: 1rem;
+    }
+
+    .title {
+        font-size: 1.3rem;
+    }
+
+    .memory-description {
+        font-size: 0.9rem;
+    }
+}
+
+/* iPhone 13 specific styles */
+@media screen and (device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) {
+    .password-input {
+        max-width: 280px;
+        padding: 1rem;
+        font-size: 1.2rem;
+    }
+
+    /* Adjust lily hotspot positions for iPhone 13 if needed */
+    .lily-hotspot {
+        border-width: 3px; /* Slightly thicker for better touch target */
+    }
+
+    /* Memory card adjustments for iPhone 13 */
+    .memory-card {
+        width: 100%;
+        height: 80vh;
+        border-radius: 20px 20px 0 0;
+    }
+
+    .close-memory-card {
+        top: 10px;
+        right: 10px;
+        font-size: 1.8rem;
+    }
+}
+
+/* Animation classes */
+.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.fade-in {
+    opacity: 1;
+    pointer-events: all;
+}
